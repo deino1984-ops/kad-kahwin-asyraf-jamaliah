@@ -1,0 +1,689 @@
+<!DOCTYPE html>
+<html lang="ms" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Walimatul Urus: Asyraf Hakimi & Jamaliah</title>
+  
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  
+  <!-- Google Fonts: Cormorant Garamond, Great Vibes & Plus Jakarta Sans -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500&family=Great+Vibes&family=Plus+Jakarta+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+  
+  <!-- Lucide Icons CDN -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            lilac: {
+              50: '#faf7fc',
+              100: '#f3ebfa',
+              200: '#e7d7f5',
+              300: '#d4b7ec',
+              500: '#9b6bc7',
+              700: '#6b4294',
+              900: '#3f2459',
+            },
+            sage: {
+              50: '#f4f7f4',
+              100: '#e3ebe4',
+              300: '#b2c8b5',
+              500: '#76967a',
+              700: '#4e6952',
+            },
+            gold: {
+              300: '#e8d08e',
+              400: '#d4af37',
+              500: '#b89225',
+              600: '#967418',
+            }
+          },
+          fontFamily: {
+            serif: ['"Cormorant Garamond"', 'serif'],
+            script: ['"Great Vibes"', 'cursive'],
+            sans: ['"Plus Jakarta Sans"', 'sans-serif'],
+          }
+        }
+      }
+    }
+  </script>
+
+  <style>
+    body {
+      background-color: #ece6f0;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+    }
+
+    /* Animasi Halus */
+    @keyframes floatSlow {
+      0%, 100% { transform: translateY(0px); }
+      50% { transform: translateY(-6px); }
+    }
+    .animate-float {
+      animation: floatSlow 4s ease-in-out infinite;
+    }
+
+    .fade-up {
+      opacity: 0;
+      transform: translateY(24px);
+      transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+    }
+    .fade-up.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* Custom Scrollbar untuk Dinding Ucapan */
+    .wishes-scroll::-webkit-scrollbar {
+      width: 5px;
+    }
+    .wishes-scroll::-webkit-scrollbar-track {
+      background: #f3ebfa;
+      border-radius: 10px;
+    }
+    .wishes-scroll::-webkit-scrollbar-thumb {
+      background: #d4b7ec;
+      border-radius: 10px;
+    }
+  </style>
+</head>
+<body class="text-slate-800 antialiased selection:bg-lilac-200 selection:text-lilac-900">
+
+  <!-- AUDIO LATAR (Instrumental Romantik Bebas Royalti) -->
+  <audio id="bgMusic" loop preload="auto">
+    <source src="https://cdn.pixabay.com/download/audio/2022/02/22/audio_d1718ab41b.mp3?filename=romantic-piano-110221.mp3" type="audio/mpeg">
+  </audio>
+
+  <!-- BUTANG KAWALAN MUZIK (MUTE/UNMUTE) -->
+  <button id="musicToggle" aria-label="Kawal Muzik" class="fixed top-4 right-4 z-40 hidden bg-white/90 backdrop-blur-md border border-gold-400/50 text-lilac-900 p-3 rounded-full shadow-lg hover:scale-105 transition">
+    <i id="musicIcon" data-lucide="volume-2" class="w-5 h-5 text-gold-600"></i>
+  </button>
+
+  <!-- ==========================================
+       SKRIN PEMBUKAAN (COVER PAGE OVERLAY)
+       ========================================== -->
+  <div id="coverPage" class="fixed inset-0 z-50 flex items-center justify-center bg-gradient-to-b from-lilac-100 via-lilac-50 to-sage-50 transition-all duration-1000 ease-in-out px-4">
+    <div class="max-w-md w-full bg-white/85 backdrop-blur-md border-2 border-gold-400/60 rounded-3xl p-8 text-center shadow-2xl relative overflow-hidden">
+      <!-- Hiasan Sudut -->
+      <div class="absolute -top-10 -left-10 w-32 h-32 bg-lilac-200/40 rounded-full blur-2xl"></div>
+      <div class="absolute -bottom-10 -right-10 w-32 h-32 bg-sage-300/40 rounded-full blur-2xl"></div>
+
+      <p class="uppercase tracking-[0.25em] text-xs font-semibold text-sage-700 mb-3">Walimatul Urus</p>
+      
+      <div class="my-6 animate-float">
+        <h1 class="font-script text-5xl text-lilac-900 leading-tight">Asyraf Hakimi</h1>
+        <p class="font-serif italic text-2xl text-gold-500 my-1">&</p>
+        <h1 class="font-script text-5xl text-lilac-900 leading-tight">Jamaliah</h1>
+      </div>
+
+      <div class="w-24 h-[1px] bg-gradient-to-r from-transparent via-gold-400 to-transparent mx-auto my-5"></div>
+
+      <p class="font-serif text-lg font-semibold text-slate-700">Ahad, 10 Januari 2027</p>
+      <p class="text-xs text-slate-500 mt-1 mb-8">Arcum Tent, Majma Mall, Kuching</p>
+
+      <button id="openCardBtn" class="inline-flex items-center justify-center gap-2 bg-gradient-to-r from-lilac-700 to-lilac-900 hover:from-lilac-900 hover:to-lilac-700 text-white font-medium text-sm px-8 py-3.5 rounded-full shadow-lg shadow-lilac-500/30 border border-gold-400/50 transition transform hover:-translate-y-0.5 active:scale-95">
+        <i data-lucide="mail-open" class="w-4 h-4 text-gold-300"></i>
+        <span>Buka Kad Jemputan</span>
+      </button>
+    </div>
+  </div>
+
+  <!-- ==========================================
+       KANDUNGAN UTAMA KAD (MOBILE-FIRST FRAME)
+       ========================================== -->
+  <main id="mainContent" class="max-w-md mx-auto bg-white min-h-screen shadow-2xl relative pb-28 overflow-hidden">
+
+    <!-- SEKSYEN 1: HERO / MUKA HADAPAN -->
+    <section class="relative pt-14 pb-12 px-6 text-center bg-gradient-to-b from-lilac-100/80 via-lilac-50/40 to-white border-b border-lilac-100">
+      <div class="inline-block px-4 py-1 rounded-full bg-sage-100 text-sage-700 text-[11px] font-semibold tracking-widest uppercase mb-4">
+        Majlis Persandingan
+      </div>
+
+      <p class="font-serif italic text-lg text-slate-600 mb-3">Bismillahirrahmanirrahim</p>
+
+      <div class="my-6">
+        <h2 class="font-script text-5xl text-lilac-900">Asyraf Hakimi</h2>
+        <span class="font-serif italic text-2xl text-gold-500 block my-1">&</span>
+        <h2 class="font-script text-5xl text-lilac-900">Jamaliah</h2>
+      </div>
+
+      <div class="flex items-center justify-center gap-3 my-5">
+        <span class="h-[1px] w-12 bg-gold-400/60"></span>
+        <i data-lucide="sparkles" class="w-4 h-4 text-gold-500"></i>
+        <span class="h-[1px] w-12 bg-gold-400/60"></span>
+      </div>
+
+      <p class="font-serif text-xl font-bold text-slate-800">Ahad, 10 Januari 2027</p>
+      <p class="text-sm text-sage-700 font-medium mt-1">10:00 Pagi – 12:00 Tengah Hari</p>
+      <p class="text-xs text-slate-500 mt-1">Arcum Tent, Majma Mall</p>
+    </section>
+
+    <!-- SEKSYEN 2: JEMPUTAN KELUARGA -->
+    <section class="py-10 px-6 text-center fade-up">
+      <p class="text-xs uppercase tracking-widest text-gold-600 font-semibold mb-4">Assalamualaikum W.B.T & Salam Sejahtera</p>
+      
+      <p class="text-sm text-slate-600 leading-relaxed mb-6">
+        Dengan penuh kesyukuran ke hadrat Ilahi, kami mempersilakan Dato' / Datin / Tuan / Puan / Encik / Cik ke majlis persandingan anakanda serta ahli keluarga kami:
+      </p>
+
+      <!-- Tuan Rumah / Wakil Keluarga -->
+      <div class="bg-lilac-50/70 border border-lilac-200/80 rounded-2xl p-5 mb-6 space-y-4">
+        <div>
+          <p class="font-serif text-base font-bold text-lilac-900 uppercase leading-snug">
+            Mohammad Saharuddin Bin Jamali & Keluarga
+          </p>
+          <p class="text-xs text-slate-600 italic mt-1">
+            (Wakil keluarga Allahyarham Jamali Bin Hussain & Allahyarhamah Dara @ Yak Binti Ali)
+          </p>
+        </div>
+
+        <div class="text-gold-500 font-serif italic text-sm">bersama</div>
+
+        <div>
+          <p class="font-serif text-base font-bold text-lilac-900 uppercase leading-snug">
+            Puan Maria Paya Wong
+          </p>
+          <p class="text-xs text-slate-600 italic mt-0.5">
+            (Ibu Pengantin Lelaki)
+          </p>
+        </div>
+      </div>
+
+      <!-- Nama Penuh Pasangan Pengantin -->
+      <div class="py-4 px-3 border-y border-gold-400/40 bg-sage-50/50 rounded-xl">
+        <p class="font-serif text-lg font-bold text-slate-800 tracking-wide">
+          ASYRAF HAKIMI GEORGE SIANG
+        </p>
+        <p class="font-script text-2xl text-gold-600 my-1">dengan pasangannya</p>
+        <p class="font-serif text-lg font-bold text-slate-800 tracking-wide">
+          JAMALIAH BINTI JAMALI
+        </p>
+      </div>
+    </section>
+
+    <!-- SEKSYEN 3: BUTIRAN MAJLIS & KIRAAN DETIK (COUNTDOWN) -->
+    <section class="py-10 px-6 bg-gradient-to-b from-white via-sage-50/60 to-white fade-up">
+      <div class="text-center mb-6">
+        <h3 class="font-serif text-2xl font-bold text-lilac-900">Atur Cara & Lokasi</h3>
+        <p class="text-xs text-slate-500">Maklumat rasmi majlis persandingan</p>
+      </div>
+
+      <!-- Kad Maklumat -->
+      <div class="bg-white border border-gold-400/50 rounded-2xl p-5 shadow-sm space-y-4 mb-8">
+        <div class="flex items-start gap-3.5">
+          <div class="p-2.5 rounded-xl bg-lilac-100 text-lilac-700 shrink-0">
+            <i data-lucide="calendar" class="w-5 h-5"></i>
+          </div>
+          <div>
+            <p class="text-xs text-slate-400 uppercase font-semibold">Tarikh</p>
+            <p class="text-sm font-semibold text-slate-800">Ahad, 10 Januari 2027</p>
+          </div>
+        </div>
+
+        <div class="flex items-start gap-3.5">
+          <div class="p-2.5 rounded-xl bg-sage-100 text-sage-700 shrink-0">
+            <i data-lucide="clock" class="w-5 h-5"></i>
+          </div>
+          <div>
+            <p class="text-xs text-slate-400 uppercase font-semibold">Masa Majlis</p>
+            <p class="text-sm font-semibold text-slate-800">10:00 Pagi – 12:00 Tengah Hari</p>
+          </div>
+        </div>
+
+        <div class="flex items-start gap-3.5">
+          <div class="p-2.5 rounded-xl bg-amber-50 text-gold-600 shrink-0">
+            <i data-lucide="map-pin" class="w-5 h-5"></i>
+          </div>
+          <div>
+            <p class="text-xs text-slate-400 uppercase font-semibold">Lokasi</p>
+            <p class="text-sm font-semibold text-slate-800">Arcum Tent, Majma Mall</p>
+            <a href="https://www.google.com/maps/place/Arcum+Tent,+Majma/@1.5544347,110.3371806,17z/data=!3m1!4b1!4m6!3m5!1s0x31fba7001d06567d:0x8eea0e59e34422be!8m2!3d1.5544347!4d110.3397555!16s%2Fg%2F11wfsqh4ss?entry=ttu&g_ep=EgoyMDI2MTExNy4wIKXMDSoASAFQAw%3D%3D" target="_blank" rel="noopener" class="inline-flex items-center gap-1 text-xs font-medium text-lilac-700 hover:underline mt-1">
+              <span>Buka dalam Google Maps</span>
+              <i data-lucide="external-link" class="w-3 h-3"></i>
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Countdown Timer -->
+      <div class="text-center">
+        <p class="text-xs uppercase tracking-widest text-sage-700 font-semibold mb-3">Menghitung Hari Bahagia</p>
+        <div id="countdown" class="grid grid-cols-4 gap-2.5">
+          <div class="bg-lilac-900 text-white rounded-2xl py-3 px-2 border border-gold-400/40 shadow">
+            <span id="days" class="font-serif text-2xl font-bold block text-gold-300">00</span>
+            <span class="text-[10px] uppercase tracking-wider text-lilac-200">Hari</span>
+          </div>
+          <div class="bg-lilac-900 text-white rounded-2xl py-3 px-2 border border-gold-400/40 shadow">
+            <span id="hours" class="font-serif text-2xl font-bold block text-gold-300">00</span>
+            <span class="text-[10px] uppercase tracking-wider text-lilac-200">Jam</span>
+          </div>
+          <div class="bg-lilac-900 text-white rounded-2xl py-3 px-2 border border-gold-400/40 shadow">
+            <span id="minutes" class="font-serif text-2xl font-bold block text-gold-300">00</span>
+            <span class="text-[10px] uppercase tracking-wider text-lilac-200">Minit</span>
+          </div>
+          <div class="bg-lilac-900 text-white rounded-2xl py-3 px-2 border border-gold-400/40 shadow">
+            <span id="seconds" class="font-serif text-2xl font-bold block text-gold-300">00</span>
+            <span class="text-[10px] uppercase tracking-wider text-lilac-200">Saat</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SEKSYEN 4: BORANG RSVP -->
+    <section id="rsvpSection" class="py-10 px-6 fade-up">
+      <div class="bg-gradient-to-br from-lilac-50 to-sage-50 border border-lilac-200 rounded-3xl p-6 shadow-sm">
+        <div class="text-center mb-6">
+          <h3 class="font-serif text-2xl font-bold text-lilac-900">Pengesahan Kehadiran</h3>
+          <p class="text-xs text-slate-600 mt-1">Sila sahkan kehadiran anda bagi memudahkan urusan jamuan</p>
+        </div>
+
+        <form id="rsvpForm" class="space-y-4">
+          <!-- Nama Tetamu -->
+          <div>
+            <label for="nama" class="block text-xs font-semibold text-slate-700 mb-1">Nama Penuh Tetamu *</label>
+            <input type="text" id="nama" name="nama" required placeholder="Contoh: Ahmad Bin Ali" class="w-full px-4 py-2.5 text-sm bg-white border border-lilac-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-lilac-500" />
+          </div>
+
+          <!-- Status Kehadiran -->
+          <div>
+            <label for="status" class="block text-xs font-semibold text-slate-700 mb-1">Status Kehadiran *</label>
+            <select id="status" name="status" class="w-full px-4 py-2.5 text-sm bg-white border border-lilac-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-lilac-500">
+              <option value="Hadir">Hadir</option>
+              <option value="Tidak Hadir">Tidak Hadir</option>
+            </select>
+          </div>
+
+          <!-- Bilangan Kehadiran (Disembunyikan jika Tidak Hadir) -->
+          <div id="bilanganWrapper">
+            <label for="bilangan" class="block text-xs font-semibold text-slate-700 mb-1">Bilangan Kehadiran (Orang) *</label>
+            <select id="bilangan" name="bilangan" class="w-full px-4 py-2.5 text-sm bg-white border border-lilac-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-lilac-500">
+              <option value="1">1 Orang</option>
+              <option value="2">2 Orang</option>
+              <option value="3">3 Orang</option>
+              <option value="4">4 Orang</option>
+              <option value="5">5 Orang</option>
+            </select>
+          </div>
+
+          <!-- Ucapan & Doa -->
+          <div>
+            <label for="ucapan" class="block text-xs font-semibold text-slate-700 mb-1">Ucapan & Doa Untuk Pengantin</label>
+            <textarea id="ucapan" name="ucapan" rows="3" placeholder="Tulis ucapan tahniah dan doa anda di sini..." class="w-full px-4 py-2.5 text-sm bg-white border border-lilac-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-lilac-500"></textarea>
+          </div>
+
+          <!-- Butang Hantar -->
+          <button type="submit" id="submitBtn" class="w-full flex items-center justify-center gap-2 bg-gradient-to-r from-lilac-700 to-lilac-900 hover:from-lilac-900 hover:to-lilac-700 text-white font-medium text-sm py-3 rounded-xl shadow-md border border-gold-400/40 transition active:scale-95">
+            <span id="btnText">Hantar Pengesahan</span>
+            <svg id="btnSpinner" class="hidden animate-spin h-4 w-4 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+              <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+              <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v8H4z"></path>
+            </svg>
+          </button>
+        </form>
+
+        <!-- Mesej Maklum Balas -->
+        <div id="formFeedback" class="hidden mt-4 p-3.5 rounded-xl text-xs font-medium text-center"></div>
+      </div>
+    </section>
+
+    <!-- SEKSYEN 5: DINDING UCAPAN (LIVE WISHES WALL) -->
+    <section class="py-8 px-6 fade-up">
+      <div class="text-center mb-5">
+        <h3 class="font-serif text-2xl font-bold text-lilac-900">Ucapan & Doa Tetamu</h3>
+        <p class="text-xs text-slate-500">Titipan doa daripada keluarga dan sahabat handai</p>
+      </div>
+
+      <div id="wishesContainer" class="max-h-80 overflow-y-auto wishes-scroll space-y-3 pr-1">
+        <!-- Kandungan dimuatkan secara dinamik dari Google Sheets -->
+        <div class="text-center py-6 text-xs text-slate-400">
+          Memuatkan ucapan tetamu...
+        </div>
+      </div>
+    </section>
+
+    <!-- PENUTUP -->
+    <footer class="pt-6 pb-8 px-6 text-center text-xs text-slate-500">
+      <p class="font-serif italic text-base text-lilac-900 mb-1">Terima Kasih</p>
+      <p>Kehadiran & doa restu anda amat kami hargai.</p>
+    </footer>
+
+  </main>
+
+  <!-- ==========================================
+       NAVIGASI PANTAS (FLOATING BOTTOM DOCK)
+       ========================================== -->
+  <nav class="fixed bottom-4 left-1/2 -translate-x-1/2 z-30 w-[92%] max-w-md bg-white/95 backdrop-blur-md border border-gold-400/60 rounded-2xl shadow-xl px-2 py-2">
+    <div class="grid grid-cols-4 gap-1 text-center">
+      <!-- Kalendar -->
+      <button onclick="openCalendarModal()" class="flex flex-col items-center justify-center py-1.5 rounded-xl hover:bg-lilac-50 text-slate-700 hover:text-lilac-900 transition">
+        <i data-lucide="calendar-plus" class="w-5 h-5 text-lilac-700 mb-0.5"></i>
+        <span class="text-[10px] font-semibold">Kalendar</span>
+      </button>
+
+      <!-- Lokasi -->
+      <a href="https://www.google.com/maps/place/Arcum+Tent,+Majma/@1.5544347,110.3371806,17z/data=!3m1!4b1!4m6!3m5!1s0x31fba7001d06567d:0x8eea0e59e34422be!8m2!3d1.5544347!4d110.3397555!16s%2Fg%2F11wfsqh4ss?entry=ttu&g_ep=EgoyMDI2MTExNy4wIKXMDSoASAFQAw%3D%3D" target="_blank" rel="noopener" class="flex flex-col items-center justify-center py-1.5 rounded-xl hover:bg-lilac-50 text-slate-700 hover:text-lilac-900 transition">
+        <i data-lucide="map-pin" class="w-5 h-5 text-sage-700 mb-0.5"></i>
+        <span class="text-[10px] font-semibold">Lokasi</span>
+      </a>
+
+      <!-- Hubungi -->
+      <button onclick="openContactModal()" class="flex flex-col items-center justify-center py-1.5 rounded-xl hover:bg-lilac-50 text-slate-700 hover:text-lilac-900 transition">
+        <i data-lucide="phone-call" class="w-5 h-5 text-gold-600 mb-0.5"></i>
+        <span class="text-[10px] font-semibold">Hubungi</span>
+      </button>
+
+      <!-- RSVP -->
+      <a href="#rsvpSection" class="flex flex-col items-center justify-center py-1.5 rounded-xl bg-lilac-100/80 text-lilac-900 font-bold transition">
+        <i data-lucide="check-circle-2" class="w-5 h-5 text-lilac-700 mb-0.5"></i>
+        <span class="text-[10px] font-semibold">RSVP</span>
+      </a>
+    </div>
+  </nav>
+
+  <!-- ==========================================
+       MODAL KALENDAR
+       ========================================== -->
+  <div id="calendarModal" class="fixed inset-0 z-50 hidden items-center justify-center bg-black/50 backdrop-blur-xs px-4">
+    <div class="bg-white rounded-3xl max-w-sm w-full p-6 shadow-2xl border border-gold-400/50">
+      <div class="flex justify-between items-center mb-4">
+        <h4 class="font-serif text-xl font-bold text-lilac-900">Simpan Tarikh</h4>
+        <button onclick="closeModal('calendarModal')" class="text-slate-400 hover:text-slate-700">
+          <i data-lucide="x" class="w-5 h-5"></i>
+        </button>
+      </div>
+      <p class="text-xs text-slate-600 mb-4">Simpan peringatan majlis ke dalam kalendar peranti anda:</p>
+      <div class="space-y-2.5">
+        <a id="googleCalLink" target="_blank" rel="noopener" class="flex items-center justify-center gap-2 w-full py-2.5 px-4 rounded-xl bg-lilac-700 text-white text-xs font-semibold hover:bg-lilac-900 transition">
+          <i data-lucide="calendar" class="w-4 h-4"></i>
+          <span>Google Calendar</span>
+        </a>
+        <button onclick="downloadICS()" class="flex items-center justify-center gap-2 w-full py-2.5 px-4 rounded-xl bg-sage-100 text-sage-700 text-xs font-semibold hover:bg-sage-300/50 transition">
+          <i data-lucide="download" class="w-4 h-4"></i>
+          <span>Apple / Kalendar Telefon (.ics)</span>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ==========================================
+       MODAL HUBUNGI (WHATSAPP)
+       ========================================== -->
+  <div id="contactModal" class="fixed inset-0 z-50 hidden items-center justify-center bg-black/50 backdrop-blur-xs px-4">
+    <div class="bg-white rounded-3xl max-w-sm w-full p-6 shadow-2xl border border-gold-400/50">
+      <div class="flex justify-between items-center mb-4">
+        <h4 class="font-serif text-xl font-bold text-lilac-900">Hubungi Keluarga</h4>
+        <button onclick="closeModal('contactModal')" class="text-slate-400 hover:text-slate-700">
+          <i data-lucide="x" class="w-5 h-5"></i>
+        </button>
+      </div>
+      <p class="text-xs text-slate-600 mb-4">Untuk sebarang pertanyaan, sila hubungi wakil keluarga di bawah:</p>
+      
+      <!-- SILA TUKAR NOMBOR TELEFON (FORMAT 601XXXXXXXX) DI BAWAH -->
+      <div class="space-y-3">
+        <a href="https://wa.me/60123456789?text=Assalamualaikum%2C%20saya%20ingin%20bertanya%20mengenai%20Majlis%20Persandingan%20Asyraf%20%26%20Jamaliah." target="_blank" rel="noopener" class="flex items-center justify-between p-3 rounded-xl border border-sage-300 bg-sage-50 hover:bg-sage-100 transition">
+          <div>
+            <p class="text-xs font-bold text-slate-800">Mohammad Saharuddin Bin Jamali</p>
+            <p class="text-[11px] text-slate-500">Wakil Keluarga Pengantin Perempuan</p>
+          </div>
+          <span class="p-2 rounded-full bg-green-600 text-white">
+            <i data-lucide="message-circle" class="w-4 h-4"></i>
+          </span>
+        </a>
+
+        <a href="https://wa.me/60198765432?text=Salam%20sejahtera%2C%20saya%20ingin%20bertanya%20mengenai%20Majlis%20Persandingan%20Asyraf%20%26%20Jamaliah." target="_blank" rel="noopener" class="flex items-center justify-between p-3 rounded-xl border border-lilac-200 bg-lilac-50 hover:bg-lilac-100 transition">
+          <div>
+            <p class="text-xs font-bold text-slate-800">Wakil Keluarga Pengantin Lelaki</p>
+            <p class="text-[11px] text-slate-500">Keluarga Puan Maria Paya Wong</p>
+          </div>
+          <span class="p-2 rounded-full bg-green-600 text-white">
+            <i data-lucide="message-circle" class="w-4 h-4"></i>
+          </span>
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- ==========================================
+       JAVASCRIPT INTERAKTIF & INTEGRASI SHEETS
+       ========================================== -->
+  <script>
+    // 1. URL GOOGLE APPS SCRIPT WEB APP ANDA
+    const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbwrDdpsSjs4UorYpPPnTGYBTUOMfpgV5hU6Cw8Y-bjecUsAAUFdEplXkuqYwLNlMeEW/exec';
+
+    // Inisialisasi Ikon Lucide
+    lucide.createIcons();
+
+    // 2. KAWALAN SKRIN PEMBUKAAN & MUZIK
+    const openCardBtn = document.getElementById('openCardBtn');
+    const coverPage = document.getElementById('coverPage');
+    const bgMusic = document.getElementById('bgMusic');
+    const musicToggle = document.getElementById('musicToggle');
+    const musicIcon = document.getElementById('musicIcon');
+    let isPlaying = false;
+
+    openCardBtn.addEventListener('click', () => {
+      coverPage.classList.add('opacity-0', 'pointer-events-none', '-translate-y-full');
+      musicToggle.classList.remove('hidden');
+      
+      bgMusic.play().then(() => {
+        isPlaying = true;
+      }).catch(() => {
+        isPlaying = false;
+        updateMusicIcon();
+      });
+    });
+
+    musicToggle.addEventListener('click', () => {
+      if (isPlaying) {
+        bgMusic.pause();
+        isPlaying = false;
+      } else {
+        bgMusic.play();
+        isPlaying = true;
+      }
+      updateMusicIcon();
+    });
+
+    function updateMusicIcon() {
+      musicIcon.setAttribute('data-lucide', isPlaying ? 'volume-2' : 'volume-x');
+      lucide.createIcons();
+    }
+
+    // 3. PEMASA KIRAAN DETIK (10 Januari 2027, 10:00 Pagi Waktu Malaysia UTC+8)
+    const eventDate = new Date('2027-01-10T10:00:00+08:00').getTime();
+
+    function updateCountdown() {
+      const now = new Date().getTime();
+      const distance = eventDate - now;
+
+      if (distance < 0) {
+        document.getElementById('countdown').innerHTML = '<div class="col-span-4 py-3 bg-lilac-900 text-gold-300 rounded-2xl text-sm font-serif">Majlis Sedang Berlangsung / Telah Selesai</div>';
+        return;
+      }
+
+      const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+      const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+      const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+      const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+      document.getElementById('days').innerText = String(days).padStart(2, '0');
+      document.getElementById('hours').innerText = String(hours).padStart(2, '0');
+      document.getElementById('minutes').innerText = String(minutes).padStart(2, '0');
+      document.getElementById('seconds').innerText = String(seconds).padStart(2, '0');
+    }
+    setInterval(updateCountdown, 1000);
+    updateCountdown();
+
+    // 4. SEMBUNYIKAN BILANGAN TETAMU JIKA PILIH "TIDAK HADIR"
+    const statusSelect = document.getElementById('status');
+    const bilanganWrapper = document.getElementById('bilanganWrapper');
+
+    statusSelect.addEventListener('change', (e) => {
+      if (e.target.value === 'Tidak Hadir') {
+        bilanganWrapper.classList.add('hidden');
+      } else {
+        bilanganWrapper.classList.remove('hidden');
+      }
+    });
+
+    // 5. HANTAR BORANG RSVP KE GOOGLE SHEETS
+    const rsvpForm = document.getElementById('rsvpForm');
+    const submitBtn = document.getElementById('submitBtn');
+    const btnText = document.getElementById('btnText');
+    const btnSpinner = document.getElementById('btnSpinner');
+    const formFeedback = document.getElementById('formFeedback');
+
+    rsvpForm.addEventListener('submit', async (e) => {
+      e.preventDefault();
+
+      // Keadaan Loading
+      submitBtn.disabled = true;
+      btnText.innerText = 'Menghantar...';
+      btnSpinner.classList.remove('hidden');
+      formFeedback.classList.add('hidden');
+
+      const payload = {
+        nama: document.getElementById('nama').value.trim(),
+        status: document.getElementById('status').value,
+        bilangan: document.getElementById('bilangan').value,
+        ucapan: document.getElementById('ucapan').value.trim()
+      };
+
+      try {
+        await fetch(SCRIPT_URL, {
+          method: 'POST',
+          mode: 'no-cors',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(payload)
+        });
+
+        showFeedback('Terima kasih! Pengesahan kehadiran dan ucapan anda telah berjaya direkodkan.', true);
+        rsvpForm.reset();
+        bilanganWrapper.classList.remove('hidden');
+
+        // Segarkan senarai ucapan selepas 1.5 saat
+        setTimeout(loadWishes, 1500);
+      } catch (err) {
+        showFeedback('Maaf, berlaku ralat semasa menghantar. Sila cuba sebentar lagi.', false);
+      } finally {
+        submitBtn.disabled = false;
+        btnText.innerText = 'Hantar Pengesahan';
+        btnSpinner.classList.add('hidden');
+      }
+    });
+
+    function showFeedback(message, isSuccess) {
+      formFeedback.innerText = message;
+      formFeedback.classList.remove('hidden', 'bg-green-100', 'text-green-800', 'bg-red-100', 'text-red-800');
+      if (isSuccess) {
+        formFeedback.classList.add('bg-green-100', 'text-green-800');
+      } else {
+        formFeedback.classList.add('bg-red-100', 'text-red-800');
+      }
+    }
+
+    // 6. MUAT TURUN & PAPAR UCAPAN DARI GOOGLE SHEETS
+    async function loadWishes() {
+      const container = document.getElementById('wishesContainer');
+
+      try {
+        const response = await fetch(SCRIPT_URL);
+        const wishes = await response.json();
+
+        if (!wishes || wishes.length === 0) {
+          container.innerHTML = '<p class="text-center text-xs text-slate-400 py-4">Jadilah tetamu terawal menitipkan ucapan buat pengantin!</p>';
+          return;
+        }
+
+        container.innerHTML = wishes.map(item => `
+          <div class="bg-lilac-50/70 border border-lilac-200/70 rounded-2xl p-4 shadow-2xs">
+            <div class="flex items-center justify-between mb-1.5">
+              <span class="text-xs font-bold text-lilac-900">${escapeHTML(item.nama)}</span>
+              <span class="text-[10px] px-2 py-0.5 rounded-full ${item.status === 'Hadir' ? 'bg-sage-100 text-sage-700' : 'bg-slate-200 text-slate-600'} font-medium">
+                ${escapeHTML(item.status)}
+              </span>
+            </div>
+            <p class="text-xs text-slate-700 leading-relaxed">"${escapeHTML(item.ucapan)}"</p>
+          </div>
+        `).join('');
+      } catch (error) {
+        container.innerHTML = '<p class="text-center text-xs text-slate-400 py-4">Belum ada ucapan atau gagal memuatkan senarai ucapan.</p>';
+      }
+    }
+
+    function escapeHTML(str) {
+      return String(str).replace(/[&<>"']/g, match => ({
+        '&': '&', '<': '<', '>': '>', '"': '"', "'": '''
+      }[match]));
+    }
+
+    // Muat ucapan semasa halaman dibuka
+    loadWishes();
+
+    // 7. FUNGSI MODAL KALENDAR & HUBUNGI
+    function openCalendarModal() {
+      const title = encodeURIComponent('Majlis Persandingan Asyraf Hakimi & Jamaliah');
+      const details = encodeURIComponent('Jemputan Majlis Persandingan Asyraf Hakimi George Siang & Jamaliah Binti Jamali.');
+      const location = encodeURIComponent('Arcum Tent, Majma Mall, Kuching');
+      // Masa dalam UTC (10 Jan 2027, 10:00-12:00 UTC+8 = 02:00-04:00 UTC)
+      const dates = '20270110T020000Z/20270110T040000Z';
+      
+      document.getElementById('googleCalLink').href = `https://calendar.google.com/calendar/render?action=TEMPLATE&text=${title}&dates=${dates}&details=${details}&location=${location}`;
+      
+      const modal = document.getElementById('calendarModal');
+      modal.classList.remove('hidden');
+      modal.classList.add('flex');
+    }
+
+    function openContactModal() {
+      const modal = document.getElementById('contactModal');
+      modal.classList.remove('hidden');
+      modal.classList.add('flex');
+    }
+
+    function closeModal(id) {
+      const modal = document.getElementById(id);
+      modal.classList.add('hidden');
+      modal.classList.remove('flex');
+    }
+
+    function downloadICS() {
+      const icsContent = [
+        'BEGIN:VCALENDAR',
+        'VERSION:2.0',
+        'BEGIN:VEVENT',
+        'DTSTART:20270110T020000Z',
+        'DTEND:20270110T040000Z',
+        'SUMMARY:Majlis Persandingan Asyraf Hakimi & Jamaliah',
+        'DESCRIPTION:Walimatul Urus Asyraf Hakimi George Siang & Jamaliah Binti Jamali',
+        'LOCATION:Arcum Tent, Majma Mall',
+        'END:VEVENT',
+        'END:VCALENDAR'
+      ].join('\n');
+
+      const blob = new Blob([icsContent], { type: 'text/calendar;charset=utf-8' });
+      const link = document.createElement('a');
+      link.href = URL.createObjectURL(blob);
+      link.download = 'Majlis-Asyraf-Jamaliah.ics';
+      link.click();
+    }
+
+    // 8. ANIMASI FADE-UP SEMASA SCROLL
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+        }
+      });
+    }, { threshold: 0.1 });
+
+    document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+  </script>
+</body>
+</html>
